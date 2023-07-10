@@ -1,0 +1,136 @@
+import 'dart:ui';
+import 'package:carousel_slider/carousel_options.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
+import 'fonts.dart';
+
+
+void main() {
+  runApp(MyApp());
+}
+
+enum SampleItem { itemOne, itemTwo, itemThree }
+
+final k162836 = Color(0xFF162836);
+final k7F2CCB = Color(0xFF7F2CCB);
+final kFAFD40 = Color(0xFFFAFD40);
+
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: '',
+      theme: ThemeData(appBarTheme: AppBarTheme(color: k162836)),
+      home: LinearGradientClass(),
+    );
+  }
+}
+
+class LinearGradientClass extends StatefulWidget {
+  const LinearGradientClass({super.key});
+
+  @override
+  State<LinearGradientClass> createState() => _LinearGradientClassState();
+}
+
+class _LinearGradientClassState extends State<LinearGradientClass> {
+  final PageController _pageController = PageController(
+    initialPage: 0,
+  );
+  int pageIndex = 0;
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  int selectedIndex = 0;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: ListView(
+          children: [
+            SizedBox(
+              height: 600,
+              child: CarouselSlider(
+                items: [
+                Center(
+                          child: Container(
+                           margin: EdgeInsets.all(20),
+                            height: 300,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(60),
+                                gradient: LinearGradient(
+                                  colors: [Color(0xff7028E4), Color(0xffE5B2CA)],
+                                  stops: [0, 1.5],
+                                  begin: Alignment.centerLeft,
+                                  end: Alignment.centerRight,
+                                )
+
+                            ),
+                            child: Center(
+                              child: Image.asset("assets/avatbay.png",height: 300,)
+                            ),
+                          ),
+                        ),
+                        Center(
+                          child: Container(
+                              height: 300,
+                              margin: EdgeInsets.all(20),
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(60),
+                                  gradient: LinearGradient(
+                                    colors: [Color(0xffFF0844), Color(0xffFFB199)],
+                                    stops: [0, 1],
+                                    begin: Alignment.centerLeft,
+                                    end: Alignment.centerRight,
+                                  )
+                              ),
+                              child: Image.asset("assets/avatargirl.png",height: 200,)
+                          ),
+                        ),
+                        Container(
+                          height: 300,
+                          margin: EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(60),
+                              gradient: LinearGradient(
+                                colors: [Color(0xffFDA085), Color(0xffF6D365).withOpacity(0.30)],
+                                stops: [0, 1.5],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                              )
+                          ),
+                          child: Image.asset("assets/avartarboye.png"),
+                        ),
+                ],
+                options: CarouselOptions(
+                  height: 300.0,
+                  enlargeCenterPage: true,
+                  autoPlay: true,
+                  aspectRatio: 1,
+                  autoPlayCurve: Curves.fastOutSlowIn,
+                  enableInfiniteScroll: true,
+                  autoPlayAnimationDuration: Duration(milliseconds: 500),
+                  viewportFraction: 0.9,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
